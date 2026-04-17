@@ -63,7 +63,7 @@ header h1 {
 
 #generate-btn {
   padding: 0.5rem 1.4rem;
-  background-color: #6c63ff;
+  background-color: #31c803;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -74,7 +74,7 @@ header h1 {
 }
 
 #generate-btn:hover {
-  background-color: #574fd6;
+  background-color: #269703;
 }
 
 #generate-btn:active {
