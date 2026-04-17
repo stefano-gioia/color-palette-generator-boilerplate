@@ -4,6 +4,8 @@ Un progetto di partenza per un esercizio introduttivo di JavaScript. L'interfacc
 grafica e i fogli di stile sono già completi — il tuo compito è aggiungere
 l'interattività completando le sezioni TODO in `main.js`.
 
+> 🚀 **Demo del risultato finale:** [color-palette-generator-solution.vercel.app](https://color-palette-generator-solution.vercel.app/)
+
 ---
 
 ## Prerequisiti

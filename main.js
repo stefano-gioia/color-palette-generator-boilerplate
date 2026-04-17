@@ -131,12 +131,18 @@ function createCard(hex) {
   // "🔒 Locked" o "🔓 Lock" in base al valore di card.classList.contains('locked').
 
   // TODO 5: Copia il valore hex negli appunti al clic del pulsante copy.
-  // Suggerimento: ascolta l'evento 'click' su copyBtn; chiama
-  // navigator.clipboard.writeText(hexInput.value) — restituisce una Promise,
-  // quindi usa .then() per eseguire il codice dopo il successo: imposta
-  // temporaneamente copyBtn.textContent a "✅ Copied!" e aggiungi la classe 'copied',
-  // poi usa setTimeout(..., 1500) per ripristinare il testo originale
+  // Suggerimento: ascolta l'evento 'click' su copyBtn con una funzione async:
+  //   copyBtn.addEventListener('click', async function() { ... })
+  // All'interno, usa "await" davanti a navigator.clipboard.writeText(hexInput.value)
+  // per attendere che la copia sia completata prima di continuare:
+  //   await navigator.clipboard.writeText(hexInput.value);
+  // Poi imposta copyBtn.textContent a "✅ Copied!" e aggiungi la classe 'copied',
+  // infine usa setTimeout(..., 1500) per ripristinare il testo originale
   // "📋 Copy" e rimuovere la classe 'copied' dopo 1,5 secondi.
+  //
+  // Nota: "async/await" è un modo più leggibile di lavorare con le Promise.
+  // "await" mette in pausa l'esecuzione della funzione finché la Promise non
+  // si risolve, evitando di dover concatenare .then() e .catch().
 
   return card;
 }
