@@ -1,79 +1,80 @@
 /**
  * Color Palette Generator — main.js
  *
- * HOW THIS FILE IS ORGANIZED:
- *  1. DOM references        — elements we interact with (already written)
- *  2. generateRandomHex()   — utility: random hex color string (already written)
- *  3. getTextColor(hex)     — utility: pick readable text color (already written)
- *  4. createCard(hex)       — builds one color card; contains TODOs 1–5
- *  5. renderPalette()       — clears the grid and fills it with cards; contains TODOs 6–7
- *  6. Event listener        — wires the button to renderPalette() (already written)
- *  7. Initial render        — calls renderPalette() on page load (already written)
+ * COME È ORGANIZZATO QUESTO FILE:
+ *  1. Riferimenti al DOM    — gli elementi con cui interagiamo (già scritto)
+ *  2. generateRandomHex()   — utilità: genera una stringa colore hex casuale (già scritto)
+ *  3. getTextColor(hex)     — utilità: sceglie il colore del testo leggibile (già scritto)
+ *  4. createCard(hex)       — costruisce una card colore; contiene i TODO 1–5
+ *  5. renderPalette()       — svuota la griglia e la riempie di card; contiene i TODO 6–7
+ *  6. Event listener        — collega il bottone a renderPalette() (già scritto)
+ *  7. Render iniziale       — chiama renderPalette() al caricamento della pagina (già scritto)
  *
- * YOUR TASKS: look for every "TODO" comment and write the code described there.
- * Do NOT change anything outside the TODO sections unless instructed.
+ * IL TUO COMPITO: cerca ogni commento "TODO" e scrivi il codice descritto lì sotto.
+ * NON modificare nulla al di fuori delle sezioni TODO, salvo diverse indicazioni.
  */
 
 // ============================================================
-// 1. DOM REFERENCES
+// 1. RIFERIMENTI AL DOM
 // ============================================================
 const generateBtn = document.getElementById("generate-btn");
 const colorCountInput = document.getElementById("color-count");
 const paletteGrid = document.getElementById("palette-grid");
 
 // ============================================================
-// 2. UTILITY — generateRandomHex()
+// 2. UTILITÀ — generateRandomHex()
 // ============================================================
 
 /**
- * Returns a random hex color string, e.g. "#a3f2c1".
+ * Restituisce una stringa colore hex casuale, es. "#a3f2c1".
  */
-const generateRandomHex = () => {
+function generateRandomHex() {
   const randomInt = Math.floor(Math.random() * 0x1000000);
   return `#${randomInt.toString(16).padStart(6, "0")}`;
-};
+}
 
 // ============================================================
-// 3. UTILITY — getTextColor(hex)
+// 3. UTILITÀ — getTextColor(hex)
 // ============================================================
 
 /**
- * Returns "#ffffff" or "#000000" so that text is always readable
- * on top of the given background color.
+ * Restituisce "#ffffff" o "#000000" in modo che il testo sia sempre
+ * leggibile sul colore di sfondo fornito.
  *
- * Uses the standard relative luminance formula (sRGB).
- * @param {string} hex - A hex color string like "#a3f2c1"
- * @returns {string} "#ffffff" or "#000000"
+ * Utilizza la formula standard della luminanza relativa (sRGB).
+ * @param {string} hex - Una stringa colore hex come "#a3f2c1"
+ * @returns {string} "#ffffff" oppure "#000000"
  */
-const getTextColor = (hex) => {
+function getTextColor(hex) {
   const r = parseInt(hex.slice(1, 3), 16) / 255;
   const g = parseInt(hex.slice(3, 5), 16) / 255;
   const b = parseInt(hex.slice(5, 7), 16) / 255;
 
-  const toLinear = (c) =>
-    c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  function toLinear(c) {
+    return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  }
 
   const luminance =
     0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
 
   return luminance > 0.179 ? "#000000" : "#ffffff";
-};
+}
 
 // ============================================================
 // 4. createCard(hex)
 // ============================================================
 
 /**
- * Creates a color card element for the given hex color and returns it.
- * @param {string} hex - A hex color string like "#a3f2c1"
- * @returns {HTMLElement} The fully assembled .card div
+ * Crea un elemento card colore per il valore hex fornito e lo restituisce.
+ * @param {string} hex - Una stringa colore hex come "#a3f2c1"
+ * @returns {HTMLElement} Il div .card completamente assemblato
  */
-const createCard = (hex) => {
-  // --- Card container ---
+function createCard(hex) {
+  // --- Contenitore della card ---
   const card = document.createElement("div");
   card.classList.add("card");
 
-  // --- Color swatch area (top half of card) ---
+  // --- Area campione colore (metà superiore della card) ---
   const swatch = document.createElement("div");
   swatch.classList.add("color-swatch");
 
@@ -90,7 +91,7 @@ const createCard = (hex) => {
   swatch.appendChild(colorPicker);
   swatch.appendChild(hexInput);
 
-  // --- Action buttons ---
+  // --- Pulsanti azione ---
   const cardActions = document.createElement("div");
   cardActions.classList.add("card-actions");
 
@@ -105,62 +106,61 @@ const createCard = (hex) => {
   cardActions.appendChild(lockBtn);
   cardActions.appendChild(copyBtn);
 
-  // --- Assemble card ---
+  // --- Assemblaggio della card ---
   card.appendChild(swatch);
   card.appendChild(cardActions);
 
-  // TODO 1: Set the card's background color and text color.
-  // Hint: set card.style.backgroundColor to hex, and card.style.color
-  // to getTextColor(hex) so text is always readable on the card.
+  // TODO 1: Imposta il colore di sfondo e il colore del testo della card.
+  // Suggerimento: assegna card.style.backgroundColor a hex, e card.style.color
+  // al risultato di getTextColor(hex) così il testo è sempre leggibile.
 
-  // TODO 2: Sync the color picker → hex text input.
-  // Hint: listen to the 'input' event on colorPicker; when it fires,
-  // update hexInput.value with colorPicker.value, then also update the
-  // card background and text color just like you did in TODO 1.
+  // TODO 2: Sincronizza il color picker → campo di testo hex.
+  // Suggerimento: ascolta l'evento 'input' su colorPicker; quando scatta,
+  // aggiorna hexInput.value con colorPicker.value, poi aggiorna anche
+  // il colore di sfondo e del testo della card come hai fatto nel TODO 1.
 
-  // TODO 3: Sync the hex text input → color picker.
-  // Hint: listen to the 'input' event on hexInput; when it fires,
-  // check whether hexInput.value matches /^#[0-9a-fA-F]{6}$/ before
-  // doing anything — only if it matches, update colorPicker.value,
-  // card.style.backgroundColor, and card.style.color.
+  // TODO 3: Sincronizza il campo di testo hex → color picker.
+  // Suggerimento: ascolta l'evento 'input' su hexInput; quando scatta,
+  // verifica che hexInput.value corrisponda a /^#[0-9a-fA-F]{6}$/ prima
+  // di fare qualsiasi cosa — solo se corrisponde, aggiorna colorPicker.value,
+  // card.style.backgroundColor e card.style.color.
 
-  // TODO 4: Toggle the locked state when the lock button is clicked.
-  // Hint: listen to the 'click' event on lockBtn; toggle the 'locked'
-  // class on card with card.classList.toggle('locked'), then update
-  // lockBtn.textContent to "🔒 Locked" or "🔓 Lock" depending on
-  // whether card.classList.contains('locked') is true or false.
+  // TODO 4: Attiva/disattiva lo stato bloccato al clic del pulsante lock.
+  // Suggerimento: ascolta l'evento 'click' su lockBtn; usa card.classList.toggle('locked')
+  // per aggiungere/rimuovere la classe, poi aggiorna lockBtn.textContent con
+  // "🔒 Locked" o "🔓 Lock" in base al valore di card.classList.contains('locked').
 
-  // TODO 5: Copy the hex value to the clipboard when the copy button is clicked.
-  // Hint: listen to the 'click' event on copyBtn; call
-  // navigator.clipboard.writeText(hexInput.value) — it returns a Promise,
-  // so use .then() to run code after it succeeds: temporarily set
-  // copyBtn.textContent to "✅ Copied!" and add the 'copied' class,
-  // then use setTimeout(..., 1500) to restore the original text
-  // "📋 Copy" and remove the 'copied' class after 1.5 seconds.
+  // TODO 5: Copia il valore hex negli appunti al clic del pulsante copy.
+  // Suggerimento: ascolta l'evento 'click' su copyBtn; chiama
+  // navigator.clipboard.writeText(hexInput.value) — restituisce una Promise,
+  // quindi usa .then() per eseguire il codice dopo il successo: imposta
+  // temporaneamente copyBtn.textContent a "✅ Copied!" e aggiungi la classe 'copied',
+  // poi usa setTimeout(..., 1500) per ripristinare il testo originale
+  // "📋 Copy" e rimuovere la classe 'copied' dopo 1,5 secondi.
 
   return card;
-};
+}
 
 // ============================================================
 // 5. renderPalette()
 // ============================================================
 
 /**
- * Clears the palette grid and fills it with freshly generated color cards.
+ * Svuota la griglia della palette e la riempie con nuove card colore.
  */
-const renderPalette = () => {
+function renderPalette() {
   paletteGrid.innerHTML = "";
 
-  // TODO 6: Read how many cards the user wants.
-  // Hint: use parseInt(colorCountInput.value, 10) and store the result
-  // in a variable called count.
+  // TODO 6: Leggi quante card vuole l'utente.
+  // Suggerimento: usa parseInt(colorCountInput.value, 10) e memorizza il risultato
+  // in una variabile chiamata count.
 
-  // TODO 7: Generate `count` color cards and add them to the grid.
-  // Hint: use a for loop that runs `count` times; on each iteration,
-  // call generateRandomHex() to get a random color, then call
-  // createCard(hex) to create the card element, and finally
-  // paletteGrid.appendChild(card) to add it to the grid.
-};
+  // TODO 7: Genera `count` card colore e aggiungile alla griglia.
+  // Suggerimento: usa un ciclo for che esegue `count` iterazioni; ad ogni iterazione,
+  // chiama generateRandomHex() per ottenere un colore casuale, poi chiama
+  // createCard(hex) per creare l'elemento card e infine
+  // paletteGrid.appendChild(card) per aggiungerlo alla griglia.
+}
 
 // ============================================================
 // 6. EVENT LISTENER
@@ -168,6 +168,6 @@ const renderPalette = () => {
 generateBtn.addEventListener("click", renderPalette);
 
 // ============================================================
-// 7. INITIAL RENDER
+// 7. RENDER INIZIALE
 // ============================================================
 renderPalette();
