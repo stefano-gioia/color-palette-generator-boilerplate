@@ -1,0 +1,14 @@
+{
+  "name": "color-palette-generator",
+  "version": "1.0.0",
+  "description": "Color Palette Generator — student exercise boilerplate",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}
