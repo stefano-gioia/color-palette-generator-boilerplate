@@ -1,97 +1,115 @@
 # 🎨 Color Palette Generator — Boilerplate
 
-A starter project for a beginner JavaScript exercise. The UI and styles are fully
-provided — your job is to wire up the interactivity by completing the TODO sections
-in `main.js`.
+Un progetto di partenza per un esercizio introduttivo di JavaScript. L'interfaccia
+grafica e i fogli di stile sono già completi — il tuo compito è aggiungere
+l'interattività completando le sezioni TODO in `main.js`.
 
 ---
 
-## Prerequisites
+## Prerequisiti
 
-- [Node.js](https://nodejs.org/) v18 or higher
-- npm (bundled with Node.js)
+- [Node.js](https://nodejs.org/) v18 o superiore
+- npm (incluso con Node.js)
 
 ---
 
-## Getting started
+## Come iniziare
+
+### 1. Fai il fork del repository
+
+Clicca il pulsante **Fork** in alto a destra su GitHub per creare una copia del
+progetto sul tuo account personale. Lavorerai sempre sulla tua copia — in questo
+modo il docente potrà vedere il tuo codice e, se vuoi, potrai aprire una
+**Pull Request** per la revisione.
+
+### 2. Clona il tuo fork in locale
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/color-palette-generator-boilerplate.git
+git clone https://github.com/<tuo-username>/color-palette-generator-boilerplate.git
 cd color-palette-generator-boilerplate
+```
 
-# 2. Install dependencies
+> ⚠️ Assicurati di clonare il **tuo fork** (URL con il tuo username),
+> non il repository originale del docente.
+
+### 3. Installa le dipendenze
+
+```bash
 npm install
+```
 
-# 3. Start the development server
+### 4. Avvia il server di sviluppo
+
+```bash
 npm run dev
 ```
 
-Open the URL shown in the terminal (usually `http://localhost:5173`) to see the app.
+Apri l'URL mostrato nel terminale (di solito `http://localhost:5173`) per vedere l'app.
 
-Other available scripts:
+Altri script disponibili:
 
-| Command | Description |
+| Comando | Descrizione |
 |---|---|
-| `npm run dev` | Start the Vite dev server with hot reload |
-| `npm run build` | Build the production bundle into `dist/` |
-| `npm run preview` | Preview the production build locally |
+| `npm run dev` | Avvia il server di sviluppo Vite con hot reload |
+| `npm run build` | Genera il bundle di produzione nella cartella `dist/` |
+| `npm run preview` | Mostra in anteprima il build di produzione in locale |
 
 ---
 
-## Project structure
+## Struttura del progetto
 
 ```
 color-palette-generator-boilerplate/
-├── index.html   ← page markup (do not modify)
-├── style.css    ← complete stylesheet (do not modify)
-├── main.js      ← ⭐ your working file
+├── index.html   ← markup della pagina (non modificare)
+├── style.css    ← foglio di stile completo (non modificare)
+├── main.js      ← ⭐ il tuo file di lavoro
 └── package.json
 ```
 
-**You only need to edit `main.js`.**
+**Devi modificare solo `main.js`.**
 
 ---
 
-## What you need to implement
+## Cosa devi implementare
 
-Open `main.js` and look for the seven `// TODO` comments. Each one has a short hint
-right below it. Here is an overview of what each TODO asks you to do:
+Apri `main.js` e cerca i sette commenti `// TODO`. Ognuno ha un suggerimento
+proprio sotto. Ecco una panoramica di cosa ti chiede ciascun TODO:
 
-### Inside `createCard(hex)` — builds one color card
+### Dentro `createCard(hex)` — costruisce una card colore
 
-| TODO | What to do |
-|------|------------|
-| **TODO 1** | Set the card's `backgroundColor` to `hex` and its `color` to the result of `getTextColor(hex)`, so the text is always readable on any background. |
-| **TODO 2** | Sync the **color picker → hex text input**: listen to the `input` event on the color picker and keep the text field updated. Also refresh the card background and text color. |
-| **TODO 3** | Sync the **hex text input → color picker**: listen to the `input` event on the text field, but only apply the change when the value is a valid 6-digit hex color (use the regex `/^#[0-9a-fA-F]{6}$/`). |
-| **TODO 4** | Toggle the **locked state**: clicking the lock button should add/remove the `locked` CSS class on the card and update the button label to *"🔒 Locked"* or *"🔓 Lock"*. |
-| **TODO 5** | **Copy to clipboard**: clicking the copy button should write the current hex value to the clipboard with `navigator.clipboard.writeText()`. Temporarily change the button text to *"✅ Copied!"* and restore it after 1.5 seconds. |
+| TODO | Cosa fare |
+|------|-----------|
+| **TODO 1** | Imposta il `backgroundColor` della card a `hex` e il `color` al risultato di `getTextColor(hex)`, così il testo è sempre leggibile su qualsiasi sfondo. |
+| **TODO 2** | Sincronizza **color picker → campo hex**: ascolta l'evento `input` sul color picker e tieni aggiornato il campo di testo. Aggiorna anche il colore di sfondo e del testo della card. |
+| **TODO 3** | Sincronizza **campo hex → color picker**: ascolta l'evento `input` sul campo di testo, ma applica la modifica solo se il valore è un colore hex valido a 6 cifre (usa la regex `/^#[0-9a-fA-F]{6}$/`). |
+| **TODO 4** | Attiva/disattiva lo **stato bloccato**: il clic sul pulsante lock deve aggiungere/rimuovere la classe CSS `locked` sulla card e aggiornare l'etichetta del pulsante con *"🔒 Locked"* o *"🔓 Lock"*. |
+| **TODO 5** | **Copia negli appunti**: il clic sul pulsante copy deve scrivere il valore hex corrente negli appunti con `navigator.clipboard.writeText()`. Cambia temporaneamente il testo del pulsante in *"✅ Copied!"* e ripristinalo dopo 1,5 secondi. |
 
-### Inside `renderPalette()` — fills the grid
+### Dentro `renderPalette()` — riempie la griglia
 
-| TODO | What to do |
-|------|------------|
-| **TODO 6** | Read the number input to find out how many cards the user wants (`parseInt`). |
-| **TODO 7** | Loop that many times: generate a random hex color, create a card, and append it to the grid. |
-
----
-
-## Concepts you will practice
-
-- DOM manipulation (`createElement`, `appendChild`, `classList`)
-- Event listeners (`addEventListener`, the `input` and `click` events)
-- Working with the Clipboard API (`navigator.clipboard.writeText`)
-- CSS class toggling for UI state (locked / copied)
-- Basic color math (luminance — already implemented, just read it!)
-- Template literals and arrow functions
+| TODO | Cosa fare |
+|------|-----------|
+| **TODO 6** | Leggi il valore dell'input numerico per sapere quante card vuole l'utente (`parseInt`). |
+| **TODO 7** | Esegui un ciclo quel numero di volte: genera un colore hex casuale, crea una card e aggiungila alla griglia. |
 
 ---
 
-## Tips
+## Concetti che praticherai
 
-- Read the hint comment below each TODO before writing any code.
-- The functions `generateRandomHex()` and `getTextColor()` are already implemented
-  and ready to use — call them, don't rewrite them.
-- Keep the browser DevTools console open to spot errors early.
-- Complete the TODOs in order: TODO 1 gives you visible feedback immediately.
+- Manipolazione del DOM (`createElement`, `appendChild`, `classList`)
+- Event listener (`addEventListener`, eventi `input` e `click`)
+- Clipboard API (`navigator.clipboard.writeText`)
+- Gestione dello stato UI tramite classi CSS (locked / copied)
+- Basi di matematica del colore (luminanza — già implementata, leggila!)
+- Template literal e funzioni classiche
+
+---
+
+## Consigli
+
+- Leggi il commento suggerimento sotto ogni TODO prima di scrivere il codice.
+- Le funzioni `generateRandomHex()` e `getTextColor()` sono già implementate
+  e pronte all'uso — chiamale, non riscriverle.
+- Tieni aperta la console degli Strumenti per sviluppatori del browser per intercettare subito gli errori.
+- Completa i TODO in ordine: il TODO 1 ti dà un riscontro visivo immediato.
+
